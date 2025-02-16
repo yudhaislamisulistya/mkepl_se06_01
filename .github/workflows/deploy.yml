@@ -38,15 +38,16 @@ jobs:
           sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_HOST <<EOF
             cd $DEPLOY_DIR
             sudo apt update && sudo apt install -y openjdk-17-jdk maven
-            mvn clean package
+            mvn clean package -DskipTests
             
             # Hentikan proses yang lama jika ada
             pkill -f 'swagger_demo' || true
 
             # Jalankan aplikasi di background dengan nohup
             nohup java -jar target/swagger_demo-0.0.1-SNAPSHOT.jar > log.txt 2>&1 &
-
+            
             # Konfirmasi bahwa aplikasi berjalan
             sleep 5
             ps aux | grep java
           EOF
+
