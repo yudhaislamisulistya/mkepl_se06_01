@@ -1,0 +1,43 @@
+name: Deploy Swagger Demo
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '00_Example_Big_Task/swagger_demo/**' 
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install SSH & SCP
+        run: sudo apt update && sudo apt install -y sshpass
+
+      - name: Copy Files to Server
+        env:
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
+          DEPLOY_DIR: ${{ secrets.DEPLOY_DIR }}
+        run: |
+          sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_HOST "mkdir -p $DEPLOY_DIR"
+          sshpass -p "$SERVER_PASSWORD" scp -r 00_Example_Big_Task/swagger_demo/* $SERVER_USER@$SERVER_HOST:$DEPLOY_DIR/
+
+      - name: Build and Run Swagger Demo
+        env:
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
+          DEPLOY_DIR: ${{ secrets.DEPLOY_DIR }}
+        run: |
+          sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_HOST <<EOF
+            cd $DEPLOY_DIR
+            sudo apt update && sudo apt install -y openjdk-17-jdk maven
+            mvn clean package
+            nohup java -jar target/swagger_demo-0.0.1-SNAPSHOT.jar > log.txt 2>&1 &
+          EOF
