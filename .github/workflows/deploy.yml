@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - '00_Example_Big_Task/swagger_demo/**' 
+      - '00_Example_Big_Task/swagger_demo/**'  # Hanya berjalan jika ada perubahan di swagger_demo
 
 jobs:
   deploy:
@@ -39,5 +39,14 @@ jobs:
             cd $DEPLOY_DIR
             sudo apt update && sudo apt install -y openjdk-17-jdk maven
             mvn clean package
+            
+            # Hentikan proses yang lama jika ada
+            pkill -f 'swagger_demo' || true
+
+            # Jalankan aplikasi di background dengan nohup
             nohup java -jar target/swagger_demo-0.0.1-SNAPSHOT.jar > log.txt 2>&1 &
+
+            # Konfirmasi bahwa aplikasi berjalan
+            sleep 5
+            ps aux | grep java
           EOF
