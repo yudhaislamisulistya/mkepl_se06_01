@@ -13,4 +13,9 @@ public class HelloController {
     public String hello() {
         return "Hello, Swagger!";
     }
+
+    @GetMapping("/apa")
+    public String apa() {
+        return "Apa kabar?";
+    }
 }
