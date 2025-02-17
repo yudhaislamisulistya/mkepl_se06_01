@@ -18,4 +18,14 @@ public class HelloController {
     public String apa() {
         return "Apa kabar?";
     }
+
+    @GetMapping("/siapa")
+    public String siapa() {
+        return "Siapa namamu?";
+    }
+
+    @GetMapping("/kapan")
+    public String kapan() {
+        return "Kapan kita ketemu?";
+    }
 }
