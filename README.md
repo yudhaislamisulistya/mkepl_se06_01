@@ -1,4 +1,4 @@
-# 📌 Repository Manajemen Konfigurasi dan Evolusi Perangkat Lunak
+# 📌 Repository Manajemen Konfigurasi dan Evolusi Perangkat Lunak - Testing
 
 Repository ini berisi materi dan praktik yang berkaitan dengan evolusi perangkat lunak, manajemen konfigurasi, version control, CI/CD, serta praktik terbaik dalam pengelolaan perangkat lunak.
 
