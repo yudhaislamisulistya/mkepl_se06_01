@@ -27,7 +27,7 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Get a product by ID", description = "Retrieve a product by its ID")
+    @Operation(summary = "Get a product by ID NEW", description = "Retrieve a product by its ID")
     public ResponseEntity<Product> getProductById(@PathVariable Long id) {
         return service.getProductById(id)
                 .map(ResponseEntity::ok)
