@@ -3,7 +3,7 @@
 public class Employee {
     private String name;
     private double salary;
-    private Double bonus; // Hanya digunakan saat akhir tahun
+    private double bonus; // Hanya digunakan saat akhir tahun
 
     public Employee(String name, double salary) {
         this.name = name;
@@ -55,6 +55,10 @@ public class Employee {
     public double getTotalSalaryWithBonus(double bonusAmount) {
         BonusCalculator bonusCalculator = new BonusCalculator(bonusAmount);
         return bonusCalculator.applyBonus(salary);
+    }
+
+    public double getTotalSalary(){
+        return salary;
     }
 }
 ```

@@ -12,6 +12,7 @@ Metode `createUser` memiliki banyak parameter. Semakin banyak parameter yang dim
 Refaktor metode `createUser` dengan membuat sebuah kelas baru yang berisi parameter-parameter tersebut.
 
 ```java
+// /project/models/UserInfo.java
 public class UserInfo {
     private String name;
     private String email;
@@ -32,7 +33,12 @@ public class UserInfo {
     }
 }
 
+// /project/services/UserService.java
 public void createUser(UserInfo userInfo) {
     // Proses pembuatan user
+}
+
+public void updateUser(int id, UserInfo userInfo) {
+    // Proses update user
 }
 ```
